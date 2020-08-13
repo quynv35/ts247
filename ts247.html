@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>TuyenSinh247</title>
+</head>
+<body>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/crypto-js.js"></script>
+
+<script>
+function getLink(key_hex, iv_hex, b64_data) {
+        var key = CryptoJS.enc.Hex.parse(key_hex);
+        var iv = CryptoJS.enc.Hex.parse(iv_hex);
+        var result = CryptoJS.AES.decrypt(b64_data, key, {iv: iv, mode: CryptoJS.mode.CBC, padding: CryptoJS.pad.NoPadding});
+        return result.toString(CryptoJS.enc.Utf8).replace(/\0/g, '');
+    }
+
+var iv_128 = '31333537393234363830363534333231';
+var key_256 = '7f3f1d42d19c2e60031c8accff3789b853f207ac9c70ea5758604cbc4abe8056';
+var video_link = 'GTjt6Wup/FmnBndDObzWskgy8K04ZPtkVGhsy8iD7Tkkw3xBdOxAzf3o6Sh9YxU/il8u4NCGOuFQZXYKX/amDk9ie5IZwcRQ6+Y3paocXgflkYi+EL9g2MSOzdPaiSdriJUtnXeyiVYRTn1b53wO6w==';
+var data = getLink(key_256,iv_128,video_link)
+document.write(data);
+</script>
+
+</body> 
+  
+</html>           
+
+
+
+
+<!-- if (support_hls) {
+             var enc_hls_link = hls_video_link[video_id];
+             link_type = "application/x-mpegURL";
+             target_link = getLink(key_256, iv_128, enc_hls_link);
+         } else if (support_flash) {//Tam thoi bo qua flash
+             var enc_rtmp_link = rtmp_video_link[video_id];
+             target_link = getLink(key_256, iv_128, enc_rtmp_link);
+             link_type = "rtmp/mp4";
+         } else if (support_mpd) {
+             var enc_mpd_link = mpd_video_link[video_id];
+             link_type = "application/dash+xml";
+             target_link = getLink(key_256, iv_128, enc_mpd_link);
+         } else {
+             var enc_http_link = http_video_link[video_id];
+             target_link = getLink(key_256, iv_128, enc_http_link);
+             link_type = "video/mp4";
+         } -->
